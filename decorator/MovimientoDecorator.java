@@ -1,8 +1,12 @@
 package decorator;
 
 public class MovimientoDecorator extends AsientoDecorator{
+    public MovimientoDecorator(Asiento asientoDecorado) {
+        super(asientoDecorado);
+    }
+
     @Override
     public double calcularPrecio() {
-        return precioBase + 2;
+        return super.calcularPrecio() + 10.0; // Costo extra por movimiento
     }
 }

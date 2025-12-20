@@ -9,9 +9,9 @@ public abstract class Asiento {
     protected EstadoAsiento estado;
 
     public Asiento() {
-        this.estado = new EstadoLibre(); // Estado inicial por defecto
+        this.estado = new EstadoLibre();
     }
-
+    
     public void setEstado(EstadoAsiento estado) {
         this.estado = estado;
     }
