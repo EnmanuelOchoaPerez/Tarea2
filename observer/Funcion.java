@@ -9,6 +9,7 @@ class Funcion {
     private LocalDateTime horario;
     private ArrayList<Observador> observadores;
 
+    private List<Observador> observadores;
     public Funcion(int idFuncion, LocalDateTime horario) {
         this.idFuncion = idFuncion;
         this.horario = horario;
