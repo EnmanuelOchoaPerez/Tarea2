@@ -3,7 +3,12 @@ package decorator;
 public abstract class AsientoDecorator extends Asiento {
     protected Asiento asientoDecorado;
 
-    public Asiento AsientoDecorator(Asiento asiento){
-        return asientoDecorado;
+    public AsientoDecorator(Asiento asientoDecorado) {
+        this.asientoDecorado = asientoDecorado;
+    }
+
+    @Override
+    public double calcularPrecio() {
+        return asientoDecorado.calcularPrecio();
     }
 }

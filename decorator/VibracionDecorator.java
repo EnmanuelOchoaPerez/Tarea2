@@ -1,8 +1,12 @@
 package decorator;
 
 public class VibracionDecorator extends AsientoDecorator{
+    public VibracionDecorator(Asiento asientoDecorado) {
+        super(asientoDecorado);
+    }
+
     @Override
     public double calcularPrecio() {
-        return precioBase + 2.5;
+        return super.calcularPrecio() + 5.0; // Costo extra por vibración
     }
 }
