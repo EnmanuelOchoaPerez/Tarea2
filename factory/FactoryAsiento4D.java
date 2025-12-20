@@ -3,6 +3,7 @@ package factory;
 import decorator.Asiento;
 import decorator.AsientoBase;
 import decorator.MovimientoDecorator;
+import decorator.VibracionDecorator;
 
 class FactoryAsiento4D extends SeatFactory {
     @Override
