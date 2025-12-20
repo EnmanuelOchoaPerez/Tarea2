@@ -7,8 +7,6 @@ import java.util.List;
 class Funcion {
     private int idFuncion;
     private LocalDateTime horario;
-    private ArrayList<Observador> observadores;
-
     private List<Observador> observadores;
     public Funcion(int idFuncion, LocalDateTime horario) {
         this.idFuncion = idFuncion;
