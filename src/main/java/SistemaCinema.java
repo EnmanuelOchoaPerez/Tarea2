@@ -1,9 +1,11 @@
 import java.time.LocalDateTime;
 
-import ChainOfResponsability.Administrador;
-import ChainOfResponsability.AgenteSoporte;
-import ChainOfResponsability.ManejadorReporte;
-import ChainOfResponsability.Reporte;
+import chainResponsability.Administrador;
+import chainResponsability.AgenteSoporte;
+import chainResponsability.ManejadorReporte;
+import chainResponsability.Reporte;
+import observer.Funcion;
+import observer.Usuario;
 import factory.*;
 import decorator.Asiento;
 
