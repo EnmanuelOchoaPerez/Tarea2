@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-class Funcion {
+public class Funcion {
     private int idFuncion;
     private LocalDateTime horario;
     private List<Observador> observadores;
