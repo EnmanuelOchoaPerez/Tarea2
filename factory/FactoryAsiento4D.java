@@ -5,7 +5,7 @@ import decorator.AsientoBase;
 import decorator.MovimientoDecorator;
 import decorator.VibracionDecorator;
 
-class FactoryAsiento4D extends SeatFactory {
+public class FactoryAsiento4D extends SeatFactory {
     @Override
     public Asiento crearAsiento() {
         Asiento asiento = new AsientoBase(301, 100.0);
