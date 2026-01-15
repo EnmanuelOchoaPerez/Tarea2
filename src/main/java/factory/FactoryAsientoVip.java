@@ -4,10 +4,11 @@ import decorator.Asiento;
 import decorator.AsientoBase;
 import decorator.VibracionDecorator;
 
-class FactoryAsientoVip extends SeatFactory {
+public class FactoryAsientoVip extends SeatFactory {
     @Override
-    public Asiento crearAsiento() {
-        Asiento asiento = new AsientoBase(201, 80.0);
+    public Asiento crearAsiento(int id, double precioBase) {
+        // Un VIP es un asiento base con un extra de comodidad (Vibración)
+        Asiento asiento = new AsientoBase(id, precioBase);
         return new VibracionDecorator(asiento);
     }
 }

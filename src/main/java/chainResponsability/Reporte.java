@@ -1,12 +1,10 @@
 package chainResponsability;
 
 public class Reporte {
-    private int idReporte;
     private String descripcion;
     private int complejidad;
 
-    public Reporte(int idReporte, String descripcion, int complejidad) {
-        this.idReporte = idReporte;
+    public Reporte(String descripcion, int complejidad) {
         this.descripcion = descripcion;
         this.complejidad = complejidad;
     }

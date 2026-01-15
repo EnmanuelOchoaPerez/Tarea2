@@ -1,7 +1,7 @@
 package decorator;
 
 import state.EstadoAsiento;
-import state.EstadoLibre;
+import state.EstadoDisponible;
 
 public abstract class Asiento {
     protected int idAsiento;
@@ -9,20 +9,29 @@ public abstract class Asiento {
     protected EstadoAsiento estado;
 
     public Asiento() {
-        this.estado = new EstadoLibre();
+        this.estado = new EstadoDisponible();
     }
     
     public void setEstado(EstadoAsiento estado) {
         this.estado = estado;
     }
 
-    public void reservar() {
-        this.estado.manejar(this);
+    public void seleccionar() {
+        estado.reservar(this);
+    }
+
+    public void confirmarPago() {
+        estado.confirmar(this);
+    }
+
+    public void cancelar() {
+        estado.cancelar(this);
     }
 
     public abstract double calcularPrecio();
 
-    public int getIdAsiento() { return idAsiento; }
+    public abstract int getIdAsiento();
+    public abstract EstadoAsiento getEstado();
     public void setIdAsiento(int idAsiento) { this.idAsiento = idAsiento; }
 
 }

@@ -7,8 +7,9 @@ import decorator.VibracionDecorator;
 
 public class FactoryAsiento4D extends SeatFactory {
     @Override
-    public Asiento crearAsiento() {
-        Asiento asiento = new AsientoBase(301, 100.0);
+    public Asiento crearAsiento(int id, double precioBase) {
+        // El 4D combina ambos efectos especiales
+        Asiento asiento = new AsientoBase(id, precioBase);
         return new MovimientoDecorator(new VibracionDecorator(asiento)); 
     }
 }

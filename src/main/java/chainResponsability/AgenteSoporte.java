@@ -8,8 +8,6 @@ public class AgenteSoporte extends ManejadorReporte{
         } else if (siguiente != null) {
             System.out.println("Agente Soporte: Reporte demasiado complejo, pasando al siguiente...");
             siguiente.procesarReporte(r);
-        } else {
-            System.out.println("Nadie pudo procesar el reporte.");
         }
     }
 }

@@ -5,7 +5,7 @@ import decorator.AsientoBase;
 
 public class FactoryAsientoEstandar extends SeatFactory {
     @Override
-    public Asiento crearAsiento() {
-        return new AsientoBase(101, 50.0); 
+    public Asiento crearAsiento(int id, double precioBase) {
+        return new AsientoBase(id, precioBase); 
     }
 }
