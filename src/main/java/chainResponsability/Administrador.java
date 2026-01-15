@@ -1,4 +1,4 @@
-package ChainOfResponsability;
+package chainResponsability;
 
 public class Administrador extends ManejadorReporte {
     @Override

@@ -1,4 +1,4 @@
-package ChainOfResponsability;
+package chainResponsability;
 
 public class Reporte {
     private int idReporte;

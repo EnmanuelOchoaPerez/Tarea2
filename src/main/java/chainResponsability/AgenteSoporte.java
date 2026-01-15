@@ -1,4 +1,4 @@
-package ChainOfResponsability;
+package chainResponsability;
 
 public class AgenteSoporte extends ManejadorReporte{
     @Override

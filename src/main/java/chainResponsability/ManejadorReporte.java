@@ -1,4 +1,4 @@
-package ChainOfResponsability;
+package chainResponsability;
 
 public abstract class ManejadorReporte {
     protected ManejadorReporte siguiente;
