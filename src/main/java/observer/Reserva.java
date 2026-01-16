@@ -1,5 +1,6 @@
 package observer;
 import decorator.Asiento;
+import config.ConfiguracionSistema;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
@@ -10,7 +11,6 @@ public class Reserva {
     private List<Asiento> asientos;
     private LocalDateTime fechaCreacion;
     private boolean pagada;
-    private static final int MINUTOS_LIMITE = 10; // Tiempo límite de pago
 
     public Reserva(Usuario cliente) {
         this.cliente = cliente;
@@ -53,7 +53,7 @@ public class Reserva {
     public boolean estaExpirada() {
         if (pagada) return false;
         long minutosTranscurridos = Duration.between(fechaCreacion, LocalDateTime.now()).toMinutes();
-        return minutosTranscurridos >= MINUTOS_LIMITE;
+        return minutosTranscurridos >= ConfiguracionSistema.MINUTOS_LIMITE_RESERVA;
     }
 
     // Getters
