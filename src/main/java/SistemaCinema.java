@@ -1,40 +1,30 @@
 import java.time.LocalDateTime;
 import chainResponsability.*;
+import decorator.AsientoBase;
 import observer.*;
 import factory.*;
 import decorator.Asiento;
 import valueobjects.Complejidad;
+import valueobjects.IdAsiento;
 
 public class SistemaCinema {
     //Esta clase es para comprobar el funcionamiento en conjunto del sistema.
     public static void main(String[] args) {
-        ManejadorReporte agente = buildReportHandlers();
-        SeatFactory factory4D = createFactory4D();
+        ConfiguradorSistema.inicializar();
 
+        System.out.println("=== INICIO DE PRUEBAS DE ESCENARIO ===\n");
 
-        Usuario user1 = new Usuario("U1", "Carlos", "carlos@mail.com");
-        Usuario user2 = new Usuario("U2", "Ana", "ana@mail.com");
-        System.out.println("=== PRUEBA 1: CONFLICTO DE ASIENTOS ===");
-        Reserva reservaCarlos = new Reserva(user1);
-        Reserva reservaAna = new Reserva(user2);
-        Asiento a4D = factory4D.crearAsiento(500, 100.0);
+        pruebaConflictoAsientos();
 
-        reservaCarlos.agregarAsiento(a4D);
-        reservaAna.agregarAsiento(a4D);
+        System.out.println("\n--------------------------------------\n");
 
-        System.out.println("\n=== PRUEBA 2: EXPIRACIÓN DE TIEMPO ===");
-        if (reservaCarlos.estaExpirada()) {
-             System.out.println("Cronómetro: Tiempo agotado para la reserva de " + user1.getNombre());
-        }
-        reservaCarlos.cancelarReserva();
+        pruebaExpiracionTiempo();
 
-        System.out.println("\n=== PRUEBA 3: SEGUNDO INTENTO TRAS LIBERACIÓN ===");
-        reservaAna.agregarAsiento(a4D);
-        reservaAna.confirmarPago();
+        System.out.println("\n--------------------------------------\n");
 
-        System.out.println("\n=== PRUEBA 4: REPORTE DE SOPORTE ===");
-        Reporte fallo = new Reporte("El proyector de la sala 4D no enciende", new Complejidad(10));
-        agente.procesarReporte(fallo);
+        pruebaCancelacionManual();
+
+        System.out.println("\n=== FIN DE PRUEBAS ===");
     }
 
     private static ManejadorReporte buildReportHandlers() {
@@ -48,5 +38,45 @@ public class SistemaCinema {
 
     private static SeatFactory createFactory4D() {
         return new FactoryAsiento4D();
+    }
+
+    private static void pruebaConflictoAsientos() {
+        System.out.println("[TEST] Escenario: Conflicto de Asientos (Concurrency)");
+
+        Asiento asiento = new AsientoBase(new IdAsiento(1).getValue(), 10);
+        Usuario user1 = new Usuario("U1", "Ana", "ana@mail.com");
+        Usuario user2 = new Usuario("U2", "Bob", "bob@mail.com");
+
+        System.out.println("Acción: Ana intenta reservar A1");
+        asiento.getEstado().reservar(asiento);
+
+        System.out.println("Acción: Bob intenta reservar A1 inmediatamente después");
+        asiento.getEstado().reservar(asiento);
+    }
+
+    private static void pruebaExpiracionTiempo() {
+        System.out.println("[TEST] Escenario: Expiración de Tiempo de Reserva");
+
+        Usuario user = new Usuario("U3", "Carlos", "carlos@mail.com");
+        Reserva reserva = new Reserva(user);
+        reserva.agregarAsiento(new AsientoBase(new IdAsiento(2).getValue(), 50));
+
+        System.out.println("Estado inicial pagada: " + reserva.isPagada());
+
+        System.out.println("Simulando espera de 20 minutos...");
+
+        reserva.confirmarPago();
+    }
+
+    private static void pruebaCancelacionManual() {
+        System.out.println("[TEST] Escenario: Liberación Manual de Asientos");
+
+        Asiento asiento = new AsientoBase(new IdAsiento(3).getValue(), 20);
+        asiento.getEstado().reservar(asiento);
+        System.out.println("Estado actual: " + asiento.getEstado().getClass().getSimpleName());
+
+        System.out.println("Acción: Usuario cancela la operación");
+        asiento.cancelar();
+        System.out.println("Estado final: " + asiento.getEstado().getClass().getSimpleName());
     }
 }
