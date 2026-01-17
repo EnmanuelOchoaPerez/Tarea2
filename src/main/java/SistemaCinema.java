@@ -41,6 +41,8 @@ public class SistemaCinema {
         ManejadorReporte agente = new AgenteSoporte();
         ManejadorReporte administrador = new Administrador();
         agente.setSiguiente(administrador);
+        ManejadorReporte fallback = new ManejadorReporteImposible();
+        agente.appendFinal(fallback);
         return agente;
     }
 
