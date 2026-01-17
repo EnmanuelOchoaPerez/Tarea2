@@ -3,6 +3,7 @@ import chainResponsability.*;
 import observer.*;
 import factory.*;
 import decorator.Asiento;
+import valueobjects.Complejidad;
 
 public class SistemaCinema {
     //Esta clase es para comprobar el funcionamiento en conjunto del sistema.
@@ -39,7 +40,7 @@ public class SistemaCinema {
         reservaAna.confirmarPago();     // Pasa a "Ocupado" definitivo
 
         System.out.println("\n=== PRUEBA 4: REPORTE DE SOPORTE ===");
-        Reporte fallo = new Reporte("El proyector de la sala 4D no enciende", 10);
+        Reporte fallo = new Reporte("El proyector de la sala 4D no enciende", new Complejidad(10));
         agente.procesarReporte(fallo);
     }
 }

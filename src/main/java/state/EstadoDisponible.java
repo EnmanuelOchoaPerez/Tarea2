@@ -5,7 +5,7 @@ import decorator.Asiento;
 public class EstadoDisponible implements EstadoAsiento {
     @Override
     public void reservar(Asiento asiento) {
-        System.out.println("Asiento " + asiento.getIdAsiento() + " ahora está EN PROCESO DE COMPRA.");
+        System.out.println("Asiento " + asiento.getIdAsiento().getValue() + " ahora está EN PROCESO DE COMPRA.");
         asiento.setEstado(new EstadoEnProceso());
     }
 

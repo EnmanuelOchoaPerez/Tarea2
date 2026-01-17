@@ -2,10 +2,12 @@ package decorator;
 
 import state.EstadoAsiento;
 import state.EstadoDisponible;
+import valueobjects.IdAsiento;
+import valueobjects.Precio;
 
 public abstract class Asiento {
-    protected int idAsiento;
-    protected double precioBase;
+    protected IdAsiento idAsiento;
+    protected Precio precioBase;
     protected EstadoAsiento estado;
 
     public Asiento() {
@@ -30,8 +32,8 @@ public abstract class Asiento {
 
     public abstract double calcularPrecio();
 
-    public abstract int getIdAsiento();
+    public abstract IdAsiento getIdAsiento();
     public abstract EstadoAsiento getEstado();
-    public void setIdAsiento(int idAsiento) { this.idAsiento = idAsiento; }
+    public void setIdAsiento(int idAsiento) { this.idAsiento = new IdAsiento(idAsiento); }
 
 }

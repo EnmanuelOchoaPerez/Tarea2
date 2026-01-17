@@ -10,13 +10,13 @@ public class EstadoEnProceso implements EstadoAsiento {
 
     @Override
     public void confirmar(Asiento asiento) {
-        System.out.println("Pago recibido. Asiento " + asiento.getIdAsiento() + " ahora está RESERVADO.");
+        System.out.println("Pago recibido. Asiento " + asiento.getIdAsiento().getValue() + " ahora está RESERVADO.");
         asiento.setEstado(new EstadoOcupado());
     }
 
     @Override
     public void cancelar(Asiento asiento) {
-        System.out.println("Tiempo agotado o compra cancelada. Liberando asiento " + asiento.getIdAsiento() + ".");
+        System.out.println("Tiempo agotado o compra cancelada. Liberando asiento " + asiento.getIdAsiento().getValue() + ".");
         asiento.setEstado(new EstadoDisponible());
     }
 }

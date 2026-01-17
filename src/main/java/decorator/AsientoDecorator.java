@@ -1,6 +1,7 @@
 package decorator;
 
 import state.EstadoAsiento;
+import valueobjects.IdAsiento;
 
 public abstract class AsientoDecorator extends Asiento {
     protected Asiento asientoDecorado;
@@ -15,7 +16,7 @@ public abstract class AsientoDecorator extends Asiento {
     }
 
     @Override
-    public int getIdAsiento() {
+    public IdAsiento getIdAsiento() {
         return asientoDecorado.getIdAsiento();
     }
 

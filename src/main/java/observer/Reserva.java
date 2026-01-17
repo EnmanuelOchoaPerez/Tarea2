@@ -1,22 +1,24 @@
 package observer;
+
 import decorator.Asiento;
 import config.ConfiguracionSistema;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
 import java.time.Duration;
+import valueobjects.EstadoPago;
 
 public class Reserva {
     private Usuario cliente;
     private List<Asiento> asientos;
     private LocalDateTime fechaCreacion;
-    private boolean pagada;
+    private EstadoPago pagada;
 
     public Reserva(Usuario cliente) {
         this.cliente = cliente;
         this.asientos = new ArrayList<>();
         this.fechaCreacion = LocalDateTime.now();
-        this.pagada = false;
+        this.pagada = new EstadoPago(false);
     }
 
     public void agregarAsiento(Asiento asiento) {
@@ -36,7 +38,7 @@ public class Reserva {
             return;
         }
         
-        this.pagada = true;
+        this.pagada.marcarPagada();
         for (Asiento a : asientos) {
             a.confirmarPago(); // Cambia a EstadoOcupado
         }
@@ -51,12 +53,12 @@ public class Reserva {
     }
 
     public boolean estaExpirada() {
-        if (pagada) return false;
+        if (pagada.isPagada()) return false;
         long minutosTranscurridos = Duration.between(fechaCreacion, LocalDateTime.now()).toMinutes();
         return minutosTranscurridos >= ConfiguracionSistema.MINUTOS_LIMITE_RESERVA;
     }
 
     // Getters
-    public boolean isPagada() { return pagada; }
+    public boolean isPagada() { return pagada.isPagada(); }
     public List<Asiento> getAsientos() { return asientos; }
 }

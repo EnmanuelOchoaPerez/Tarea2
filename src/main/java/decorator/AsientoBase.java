@@ -1,18 +1,20 @@
 package decorator;
 
 import state.EstadoAsiento;
+import valueobjects.IdAsiento;
+import valueobjects.Precio;
 
 public class AsientoBase extends Asiento {
     public AsientoBase(int id, double precio) {
-        this.idAsiento = id;
-        this.precioBase = precio;
+        this.idAsiento = new IdAsiento(id);
+        this.precioBase = new Precio(precio);
     }
 
     @Override
-    public double calcularPrecio() { return precioBase; }
+    public double calcularPrecio() { return precioBase.getValue(); }
 
     @Override
-    public int getIdAsiento() { return idAsiento; }
+    public IdAsiento getIdAsiento() { return idAsiento; }
 
     @Override
     public EstadoAsiento getEstado() { return estado; }
