@@ -10,16 +10,18 @@ public abstract class Asiento {
     private final Precio precioBase;
     private EstadoAsiento estado;
 
-    protected Asiento(IdAsiento idAsiento, Precio precioBase) {
-        if (idAsiento == null) throw new IllegalArgumentException("IdAsiento requerido");
-        if (precioBase == null) throw new IllegalArgumentException("Precio requerido");
+    public Asiento(IdAsiento idAsiento, Precio precioBase) {
+        if (idAsiento == null) throw new IllegalArgumentException("El ID no puede ser nulo");
+        if (precioBase.getValue() < 0) throw new IllegalArgumentException("El precio no puede ser negativo");
+
         this.idAsiento = idAsiento;
         this.precioBase = precioBase;
         this.estado = new EstadoDisponible();
     }
 
-    public void setEstado(EstadoAsiento estado) {
-        this.estado = estado;
+    public void setEstado(EstadoAsiento nuevoEstado) {
+        if (nuevoEstado == null) throw new IllegalArgumentException("El estado no puede ser nulo");
+        this.estado = nuevoEstado;
     }
 
     public void seleccionar() {

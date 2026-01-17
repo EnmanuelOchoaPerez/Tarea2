@@ -1,5 +1,6 @@
 package observer;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Usuario implements Observador {
@@ -9,8 +10,9 @@ public class Usuario implements Observador {
     private final List<Reserva> misReservas;
 
     public Usuario(String id, String nombre, String email) {
+        if (nombre == null || email == null) throw new IllegalArgumentException("Datos obligatorios");
+
         this.id = new valueobjects.UsuarioId(id);
-        if (nombre == null || nombre.trim().isEmpty()) throw new IllegalArgumentException("Nombre inválido");
         this.nombre = nombre;
         this.email = new valueobjects.Email(email);
         this.misReservas = new ArrayList<>();
@@ -28,11 +30,14 @@ public class Usuario implements Observador {
     }
 
     public void agregarReserva(Reserva reserva) {
+        if (reserva == null) throw new IllegalArgumentException("No se puede agregar una reserva nula");
         this.misReservas.add(reserva);
     }
 
     public String getNombre() { return nombre; }
     public String getEmail() { return email.getValue(); }
     public valueobjects.Email getEmailObj() { return email; }
-    public List<Reserva> getMisReservas() { return List.copyOf(misReservas); }
+    public List<Reserva> getMisReservas() {
+        return Collections.unmodifiableList(this.misReservas);
+    }
 }

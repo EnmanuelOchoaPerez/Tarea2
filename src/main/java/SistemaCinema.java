@@ -11,9 +11,9 @@ public class SistemaCinema {
         ManejadorReporte agente = buildReportHandlers();
         SeatFactory factory4D = createFactory4D();
 
+
         Usuario user1 = new Usuario("U1", "Carlos", "carlos@mail.com");
         Usuario user2 = new Usuario("U2", "Ana", "ana@mail.com");
-
         System.out.println("=== PRUEBA 1: CONFLICTO DE ASIENTOS ===");
         Reserva reservaCarlos = new Reserva(user1);
         Reserva reservaAna = new Reserva(user2);
