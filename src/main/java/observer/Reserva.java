@@ -2,33 +2,31 @@ package observer;
 
 import decorator.Asiento;
 import config.ConfiguracionSistema;
-import java.util.ArrayList;
-import java.util.List;
 import java.time.LocalDateTime;
 import java.time.Duration;
 import valueobjects.EstadoPago;
+import observer.CarritoCompra;
+import java.util.List;
 
 public class Reserva {
     private Usuario cliente;
-    private List<Asiento> asientos;
+    private CarritoCompra carrito;
     private LocalDateTime fechaCreacion;
     private EstadoPago pagada;
 
     public Reserva(Usuario cliente) {
         this.cliente = cliente;
-        this.asientos = new ArrayList<>();
+        this.carrito = new CarritoCompra();
         this.fechaCreacion = LocalDateTime.now();
         this.pagada = new EstadoPago(false);
     }
 
     public void agregarAsiento(Asiento asiento) {
-        // El asiento intenta pasar a "En Proceso"
-        asiento.seleccionar(); 
-        asientos.add(asiento);
+        carrito.agregarAsiento(asiento);
     }
 
     public double calcularTotal() {
-        return asientos.stream().mapToDouble(Asiento::calcularPrecio).sum();
+        return carrito.calcularTotal();
     }
 
     public void confirmarPago() {
@@ -37,19 +35,14 @@ public class Reserva {
             cancelarReserva();
             return;
         }
-        
+
         this.pagada.marcarPagada();
-        for (Asiento a : asientos) {
-            a.confirmarPago(); // Cambia a EstadoOcupado
-        }
+        carrito.confirmarPago();
         System.out.println("Pago de $" + calcularTotal() + " procesado para " + cliente.getNombre());
     }
 
     public void cancelarReserva() {
-        for (Asiento a : asientos) {
-            a.cancelar(); // Cambia a EstadoLibre
-        }
-        asientos.clear();
+        carrito.cancelar();
     }
 
     public boolean estaExpirada() {
@@ -60,5 +53,5 @@ public class Reserva {
 
     // Getters
     public boolean isPagada() { return pagada.isPagada(); }
-    public List<Asiento> getAsientos() { return asientos; }
+    public List<Asiento> getAsientos() { return carrito.getAsientos(); }
 }
