@@ -3,21 +3,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario implements Observador {
-    private String id;
-    private String nombre;
-    private String email;
-    private List<Reserva> misReservas;
+    private final valueobjects.UsuarioId id;
+    private final String nombre;
+    private final valueobjects.Email email;
+    private final List<Reserva> misReservas;
 
     public Usuario(String id, String nombre, String email) {
-        this.id = id;
+        this.id = new valueobjects.UsuarioId(id);
+        if (nombre == null || nombre.trim().isEmpty()) throw new IllegalArgumentException("Nombre inválido");
         this.nombre = nombre;
-        this.email = email;
+        this.email = new valueobjects.Email(email);
         this.misReservas = new ArrayList<>();
     }
 
     @Override
     public void actualizar(String mensaje) {
-        // Simulación de envío de correo o mensaje de aplicación
+        enviarNotificacion(mensaje);
+    }
+
+    public void enviarNotificacion(String mensaje) {
         System.out.println("--- NOTIFICACIÓN PARA " + nombre.toUpperCase() + " ---");
         System.out.println("Mensaje: " + mensaje);
         System.out.println("------------------------------------------");
@@ -28,6 +32,7 @@ public class Usuario implements Observador {
     }
 
     public String getNombre() { return nombre; }
-    public String getEmail() { return email; }
+    public String getEmail() { return email.getValue(); }
+    public valueobjects.Email getEmailObj() { return email; }
     public List<Reserva> getMisReservas() { return List.copyOf(misReservas); }
 }

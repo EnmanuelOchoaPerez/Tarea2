@@ -2,11 +2,13 @@ package decorator;
 
 import state.EstadoAsiento;
 import valueobjects.IdAsiento;
+import valueobjects.Precio;
 
 public abstract class AsientoDecorator extends Asiento {
     protected Asiento asientoDecorado;
 
     public AsientoDecorator(Asiento asientoDecorado) {
+        super(asientoDecorado.getIdAsiento(), new Precio(asientoDecorado.calcularPrecio()));
         this.asientoDecorado = asientoDecorado;
     }
 
