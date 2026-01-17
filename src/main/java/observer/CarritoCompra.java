@@ -37,6 +37,6 @@ public class CarritoCompra {
     }
 
     public List<Asiento> getAsientos() {
-        return asientos;
+        return List.copyOf(asientos);
     }
 }
